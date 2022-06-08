@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 
 import BottomSheet from "@gorhom/bottom-sheet";
 
@@ -9,6 +9,7 @@ import { ChatTeardropDots } from 'phosphor-react-native'
 import { styles } from './styles'
 
 import { theme } from "../../theme";
+import { Copyright } from "../copyright";
 
 export const Widget = () => {
   const bottomSheetRef = useRef<BottomSheet>(null)
@@ -33,6 +34,9 @@ export const Widget = () => {
         handleIndicatorStyle={styles.indicator}
       >
 
+        <View style={styles.copyrightWrapper}>
+          <Copyright />
+        </View>
       </BottomSheet>
     </>
   )
