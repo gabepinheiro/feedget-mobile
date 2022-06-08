@@ -1,6 +1,6 @@
-import AppLoading from "expo-app-loading";
+// import AppLoading from "expo-app-loading";
 
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 import {
@@ -10,6 +10,7 @@ import {
 } from "@expo-google-fonts/inter";
 
 import { theme } from './src/theme';
+import { Widget } from "./src/components/widget";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -18,12 +19,12 @@ export default function App() {
   })
 
   if(!fontsLoaded) {
-    return <AppLoading />
+    return null
   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Hello World</Text>
+     <Widget />
 
       <StatusBar
         style="light"
@@ -40,9 +41,5 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.background,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-
-  text: {
-    color: '#fff'
   }
 });
