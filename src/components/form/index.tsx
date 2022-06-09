@@ -31,6 +31,7 @@ export function Form ({
   onFeedbackSent
 }: FormProps) {
   const [screenshot, setScreenshot] = useState<string | null>(null)
+  const [isSendingFeedback, setIsSendingFeedback] = useState(false)
 
   const feedbackTypeInfo = feedbackTypes[feedbackType]
 
@@ -49,6 +50,16 @@ export function Form ({
   }
 
   const handleScreenshotRemove = () => setScreenshot(null)
+
+  const handleSendFeedback = () => {
+    if(isSendingFeedback) return;
+
+    setIsSendingFeedback(true)
+
+    setTimeout(() => {
+      setIsSendingFeedback(false)
+    }, 2000)
+  }
 
   return (
     <View style={styles.container}>
@@ -89,7 +100,10 @@ export function Form ({
           onRemoveShot={handleScreenshotRemove}
         />
 
-        <Button onPress={onFeedbackSent} />
+        <Button
+          isLoading={isSendingFeedback}
+          onPress={handleSendFeedback}
+        />
       </View>
     </View>
   )
