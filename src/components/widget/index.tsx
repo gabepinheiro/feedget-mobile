@@ -42,9 +42,9 @@ export const Widget = () => {
       >
         {/* <Options /> */}
 
-        {/* <Form feedbackType="OTHER" /> */}
+        <Form feedbackType="OTHER" />
 
-        <Success />
+        {/* <Success /> */}
 
         <View style={styles.copyrightWrapper}>
           <Copyright />

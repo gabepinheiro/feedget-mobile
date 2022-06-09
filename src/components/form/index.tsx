@@ -7,22 +7,42 @@ import {
 } from 'react-native'
 
 import { ArrowLeft } from 'phosphor-react-native'
+import { ScreenshotButton } from '../screenshot-button'
+import { Button } from '../button'
 
-import { FeedbackType } from '../widget'
+import { captureScreen } from 'react-native-view-shot'
 
 import { theme } from '../../theme'
 import { styles } from './styles'
 
+import { FeedbackType } from '../widget'
 import { feedbackTypes } from '../../utils/feedbackTypes'
-import { ScreenshotButton } from '../screenshot-button'
-import { Button } from '../button'
+import { useState } from 'react'
 
 interface FormProps {
   feedbackType: FeedbackType
 }
 
 export function Form ({ feedbackType }: FormProps) {
+  const [screenshot, setScreenshot] = useState<string | null>(null)
+
   const feedbackTypeInfo = feedbackTypes[feedbackType]
+
+  const handleScreenshot = async () => {
+    try {
+      const uri = await captureScreen({
+        format: 'jpg',
+        quality: 0.8
+      })
+
+      setScreenshot(uri)
+      console.log(uri)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleScreenshotRemove = () => setScreenshot(null)
 
   return (
     <View style={styles.container}>
@@ -55,9 +75,9 @@ export function Form ({ feedbackType }: FormProps) {
 
       <View style={styles.footer}>
         <ScreenshotButton
-          screenshot='https://github.com/gabepinheiro.png'
-          onTakeShot={() => {}}
-          onRemoveShot={() => {}}
+          screenshot={screenshot}
+          onTakeShot={handleScreenshot}
+          onRemoveShot={handleScreenshotRemove}
         />
 
         <Button />
