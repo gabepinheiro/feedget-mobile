@@ -4,13 +4,18 @@ import { TouchableOpacity, View } from "react-native";
 
 import BottomSheet from "@gorhom/bottom-sheet";
 
+import { Options } from "../options";
+import { Copyright } from "../copyright";
+
 import { ChatTeardropDots } from 'phosphor-react-native'
 
 import { styles } from './styles'
 
 import { theme } from "../../theme";
-import { Copyright } from "../copyright";
-import { Options } from "../options";
+import { feedbackTypes } from "../../utils/feedbackTypes";
+import { Form } from "../form";
+
+export type FeedbackType = keyof typeof feedbackTypes
 
 export const Widget = () => {
   const bottomSheetRef = useRef<BottomSheet>(null)
@@ -35,7 +40,9 @@ export const Widget = () => {
         handleIndicatorStyle={styles.indicator}
       >
 
-        <Options />
+        {/* <Options /> */}
+
+        <Form feedbackType="OTHER" />
 
         <View style={styles.copyrightWrapper}>
           <Copyright />
