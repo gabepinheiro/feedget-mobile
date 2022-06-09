@@ -22,9 +22,14 @@ import { useState } from 'react'
 interface FormProps {
   feedbackType: FeedbackType
   onFeedbackReset: () => void
+  onFeedbackSent: () => void
 }
 
-export function Form ({ feedbackType, onFeedbackReset }: FormProps) {
+export function Form ({
+  feedbackType,
+  onFeedbackReset,
+  onFeedbackSent
+}: FormProps) {
   const [screenshot, setScreenshot] = useState<string | null>(null)
 
   const feedbackTypeInfo = feedbackTypes[feedbackType]
@@ -83,7 +88,7 @@ export function Form ({ feedbackType, onFeedbackReset }: FormProps) {
           onRemoveShot={handleScreenshotRemove}
         />
 
-        <Button />
+        <Button onPress={onFeedbackSent} />
       </View>
     </View>
   )

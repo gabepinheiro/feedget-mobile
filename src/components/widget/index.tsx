@@ -29,6 +29,10 @@ export const Widget = () => {
     setFeedbackSent(false)
   }
 
+  const handleFeedbackSent = () => {
+    setFeedbackSent(true)
+  }
+
   const handleFeedbackTypeReset = () => setFeedbackType(null)
 
   const handleOpen = () => {
@@ -50,7 +54,7 @@ export const Widget = () => {
         backgroundStyle={styles.modal}
         handleIndicatorStyle={styles.indicator}
       >
-        {!feedbackType && (
+        {!feedbackType && !feedbackSent && (
           <Options onFeedbackTypeChanged={handleFeedbackType} />
         )}
 
@@ -58,6 +62,7 @@ export const Widget = () => {
           <Form
             feedbackType={feedbackType}
             onFeedbackReset={handleFeedbackTypeReset}
+            onFeedbackSent={handleFeedbackSent}
           />
         )}
 
