@@ -55,7 +55,7 @@ export function Form ({ feedbackType }: FormProps) {
 
       <View style={styles.footer}>
         <ScreenshotButton
-          screenshot=''
+          screenshot='https://github.com/gabepinheiro.png'
           onTakeShot={() => {}}
           onRemoveShot={() => {}}
         />
