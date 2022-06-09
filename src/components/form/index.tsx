@@ -21,9 +21,10 @@ import { useState } from 'react'
 
 interface FormProps {
   feedbackType: FeedbackType
+  onFeedbackReset: () => void
 }
 
-export function Form ({ feedbackType }: FormProps) {
+export function Form ({ feedbackType, onFeedbackReset }: FormProps) {
   const [screenshot, setScreenshot] = useState<string | null>(null)
 
   const feedbackTypeInfo = feedbackTypes[feedbackType]
@@ -47,7 +48,9 @@ export function Form ({ feedbackType }: FormProps) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={onFeedbackReset}
+        >
           <ArrowLeft
             size={24}
             weight='bold'

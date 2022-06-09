@@ -26,7 +26,10 @@ export const Widget = () => {
 
   const handleFeedbackType = (type: FeedbackType) => {
     setFeedbackType(type)
+    setFeedbackSent(false)
   }
+
+  const handleFeedbackTypeReset = () => setFeedbackType(null)
 
   const handleOpen = () => {
     bottomSheetRef.current?.expand()
@@ -51,7 +54,12 @@ export const Widget = () => {
           <Options onFeedbackTypeChanged={handleFeedbackType} />
         )}
 
-        {feedbackType && !feedbackSent && <Form feedbackType={feedbackType} />}
+        {feedbackType && !feedbackSent && (
+          <Form
+            feedbackType={feedbackType}
+            onFeedbackReset={handleFeedbackTypeReset}
+          />
+        )}
 
         {feedbackSent && <Success />}
 
