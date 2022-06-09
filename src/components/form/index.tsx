@@ -15,6 +15,7 @@ import { styles } from './styles'
 
 import { feedbackTypes } from '../../utils/feedbackTypes'
 import { ScreenshotButton } from '../screenshot-button'
+import { Button } from '../button'
 
 interface FormProps {
   feedbackType: FeedbackType
@@ -58,6 +59,8 @@ export function Form ({ feedbackType }: FormProps) {
           onTakeShot={() => {}}
           onRemoveShot={() => {}}
         />
+
+        <Button />
       </View>
     </View>
   )
