@@ -79,6 +79,7 @@ export function Form ({
         style={styles.input}
         placeholder='Conte com detalhes o que está acontecendo...'
         placeholderTextColor={theme.colors.text_primary}
+        autoCorrect={false}
       />
 
       <View style={styles.footer}>
