@@ -14,6 +14,7 @@ import { styles } from './styles'
 import { theme } from "../../theme";
 import { feedbackTypes } from "../../utils/feedbackTypes";
 import { Form } from "../form";
+import { Success } from "../success";
 
 export type FeedbackType = keyof typeof feedbackTypes
 
@@ -39,10 +40,11 @@ export const Widget = () => {
         backgroundStyle={styles.modal}
         handleIndicatorStyle={styles.indicator}
       >
-
         {/* <Options /> */}
 
-        <Form feedbackType="OTHER" />
+        {/* <Form feedbackType="OTHER" /> */}
+
+        <Success />
 
         <View style={styles.copyrightWrapper}>
           <Copyright />
