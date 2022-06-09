@@ -28,12 +28,9 @@ export const Widget = () => {
     setFeedbackType(type)
   }
 
-  const handleFeedbackSent = () => {
-    setFeedbackSent(true)
-    setFeedbackType(null)
-  }
+  const handleFeedbackSent = () => setFeedbackSent(true)
 
-  const handleFeedbackTypeReset = () => {
+  const handleFeedbackReset = () => {
     setFeedbackType(null)
     setFeedbackSent(false)
   }
@@ -64,12 +61,12 @@ export const Widget = () => {
         {feedbackType && !feedbackSent && (
           <Form
             feedbackType={feedbackType}
-            onFeedbackReset={handleFeedbackTypeReset}
+            onFeedbackReset={handleFeedbackReset}
             onFeedbackSent={handleFeedbackSent}
           />
         )}
 
-        {feedbackSent && <Success />}
+        {feedbackSent && <Success onSendAnotherFeedback={handleFeedbackReset} />}
 
         <View style={styles.copyrightWrapper}>
           <Copyright />
