@@ -2,10 +2,15 @@ import { Text, View } from 'react-native'
 
 import { feedbackTypes } from '../../utils/feedbackTypes'
 import { Option } from '../option'
+import { FeedbackType } from '../widget'
 
 import { styles } from './styles'
 
-export function Options () {
+interface OptionsProps {
+  onFeedbackTypeChanged: (type: FeedbackType) => void
+}
+
+export function Options ({ onFeedbackTypeChanged }: OptionsProps) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
@@ -17,6 +22,7 @@ export function Options () {
           <Option
             key={key}
             {...value}
+            onPress={() => onFeedbackTypeChanged(key as FeedbackType)}
           />
         ))}
       </View>

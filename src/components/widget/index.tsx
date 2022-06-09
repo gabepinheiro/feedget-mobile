@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import { TouchableOpacity, View } from "react-native";
 
@@ -21,6 +21,13 @@ export type FeedbackType = keyof typeof feedbackTypes
 export const Widget = () => {
   const bottomSheetRef = useRef<BottomSheet>(null)
 
+  const [feedbackType, setFeedbackType] = useState<FeedbackType | null>(null)
+  const [feedbackSent, setFeedbackSent] = useState(false)
+
+  const handleFeedbackType = (type: FeedbackType) => {
+    setFeedbackType(type)
+  }
+
   const handleOpen = () => {
     bottomSheetRef.current?.expand()
   }
@@ -40,11 +47,13 @@ export const Widget = () => {
         backgroundStyle={styles.modal}
         handleIndicatorStyle={styles.indicator}
       >
-        {/* <Options /> */}
+        {!feedbackType && (
+          <Options onFeedbackTypeChanged={handleFeedbackType} />
+        )}
 
-        <Form feedbackType="OTHER" />
+        {feedbackType && !feedbackSent && <Form feedbackType={feedbackType} />}
 
-        {/* <Success /> */}
+        {feedbackSent && <Success />}
 
         <View style={styles.copyrightWrapper}>
           <Copyright />
