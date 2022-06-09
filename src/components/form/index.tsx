@@ -14,6 +14,7 @@ import { theme } from '../../theme'
 import { styles } from './styles'
 
 import { feedbackTypes } from '../../utils/feedbackTypes'
+import { ScreenshotButton } from '../screenshot-button'
 
 interface FormProps {
   feedbackType: FeedbackType
@@ -50,6 +51,14 @@ export function Form ({ feedbackType }: FormProps) {
         placeholder='Conte com detalhes o que está acontecendo...'
         placeholderTextColor={theme.colors.text_primary}
       />
+
+      <View style={styles.footer}>
+        <ScreenshotButton
+          screenshot=''
+          onTakeShot={() => {}}
+          onRemoveShot={() => {}}
+        />
+      </View>
     </View>
   )
 }
