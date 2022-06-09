@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import {
   View,
   TextInput,
@@ -5,6 +7,10 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native'
+
+import * as FileSystem from 'expo-file-system'
+
+import { api } from '../../lib/api'
 
 import { ArrowLeft } from 'phosphor-react-native'
 import { ScreenshotButton } from '../screenshot-button'
@@ -17,7 +23,6 @@ import { styles } from './styles'
 
 import { FeedbackType } from '../widget'
 import { feedbackTypes } from '../../utils/feedbackTypes'
-import { useState } from 'react'
 
 interface FormProps {
   feedbackType: FeedbackType
@@ -32,6 +37,7 @@ export function Form ({
 }: FormProps) {
   const [screenshot, setScreenshot] = useState<string | null>(null)
   const [isSendingFeedback, setIsSendingFeedback] = useState(false)
+  const [comment, setComment] = useState('')
 
   const feedbackTypeInfo = feedbackTypes[feedbackType]
 
@@ -51,14 +57,30 @@ export function Form ({
 
   const handleScreenshotRemove = () => setScreenshot(null)
 
-  const handleSendFeedback = () => {
+  const handleSendFeedback = async () => {
     if(isSendingFeedback) return;
 
     setIsSendingFeedback(true)
 
-    setTimeout(() => {
+    try {
+      const screenshotBase64 = screenshot && await FileSystem.readAsStringAsync(
+        screenshot, {
+          encoding: 'base64'
+        }
+      )
+
+      const res = await api.post('/feedbacks', {
+        type: feedbackType,
+        screenshot: `data:image/png;base64, ${screenshotBase64}`,
+        comment
+      })
+
       setIsSendingFeedback(false)
-    }, 2000)
+      onFeedbackSent()
+    } catch (error) {
+      console.log(error)
+      setIsSendingFeedback(false)
+    }
   }
 
   return (
@@ -91,6 +113,7 @@ export function Form ({
         placeholder='Conte com detalhes o que está acontecendo...'
         placeholderTextColor={theme.colors.text_primary}
         autoCorrect={false}
+        onChangeText={setComment}
       />
 
       <View style={styles.footer}>

@@ -26,14 +26,17 @@ export const Widget = () => {
 
   const handleFeedbackType = (type: FeedbackType) => {
     setFeedbackType(type)
-    setFeedbackSent(false)
   }
 
   const handleFeedbackSent = () => {
     setFeedbackSent(true)
+    setFeedbackType(null)
   }
 
-  const handleFeedbackTypeReset = () => setFeedbackType(null)
+  const handleFeedbackTypeReset = () => {
+    setFeedbackType(null)
+    setFeedbackSent(false)
+  }
 
   const handleOpen = () => {
     bottomSheetRef.current?.expand()
