@@ -10,6 +10,7 @@ import { styles } from './styles'
 
 import { theme } from "../../theme";
 import { Copyright } from "../copyright";
+import { Options } from "../options";
 
 export const Widget = () => {
   const bottomSheetRef = useRef<BottomSheet>(null)
@@ -33,6 +34,8 @@ export const Widget = () => {
         backgroundStyle={styles.modal}
         handleIndicatorStyle={styles.indicator}
       >
+
+        <Options />
 
         <View style={styles.copyrightWrapper}>
           <Copyright />
